@@ -2,19 +2,24 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import {useQuery} from '@tanstack/react-query'
 import {Button, DatePicker, Form, Input, Select} from 'antd'
 import {Controller, useForm} from 'react-hook-form'
+import {Division} from '../../types/employee.ts'
+import {ApiInstance} from '../lib/axios/AxiosInstance.ts'
 import {newEmployeeSchema, NewEmployeeSchemaType} from '../schemas/newEmployee.ts'
 
 export const NewEmployeeForm = () => {
-	const divisionQuery = useQuery({
+	const fetchAllDivisions = async () => {
+		const response = await ApiInstance.get('/division')
+		return response.data
+	}
+
+	const {data: divisionData, isLoading: divisionLoading, isError: divisionError} = useQuery({
 		queryKey: ['division'],
-		queryFn: () => {
-		},
+		queryFn: fetchAllDivisions,
 	})
 
 	const {control, handleSubmit, formState: {errors}} = useForm<NewEmployeeSchemaType>({
 		resolver: zodResolver(newEmployeeSchema),
 	})
-
 
 	const onSubmit = (values: NewEmployeeSchemaType) => {
 		console.log(values)
@@ -42,13 +47,17 @@ export const NewEmployeeForm = () => {
 				<Controller control={control} name='position' render={({field}) => (
 					<Select
 						{...field}
+						disabled={divisionLoading || divisionError}
+						loading={divisionLoading}
 						style={{width: 120}}
 						onChange={field.onChange}
-						options={[
-							{value: 1, label: 'Jack'},
-							{value: 2, label: 'Lucy'},
-							{value: 2, label: 'yiminghe'},
-						]}
+						defaultValue={'Choose position'}
+						options={divisionData ? divisionData.map((el: Division) => {
+							return {
+								value: el.id,
+								label: el.division_name,
+							}
+						}) : null}
 					/>)} />
 			</Form.Item>
 			<Button type='primary' htmlType='submit'>
