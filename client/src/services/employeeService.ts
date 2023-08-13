@@ -1,6 +1,6 @@
 import {AxiosResponse} from 'axios'
 import {CONSTANTS} from '../constants/constants.ts'
-import {apiInstance} from '../lib/axios/AxiosInstance.ts'
+import {apiInstance} from '../lib/axios/axiosInstance.ts'
 import {IEmployee} from '../types/employee.ts'
 
 class EmployeeService {
@@ -16,7 +16,7 @@ class EmployeeService {
 	}
 
 	async createNewEmployee(data: unknown) {
-		const response = await apiInstance.post(this.EMPLOYEE_ENDPOINT, data)
+		const response: AxiosResponse<IEmployee> = await apiInstance.post(this.EMPLOYEE_ENDPOINT, data)
 		return response.data
 	}
 }

@@ -1,5 +1,6 @@
 import {CONSTANTS} from '../constants/constants.ts'
-import {apiInstance} from '../lib/axios/AxiosInstance.ts'
+import {apiInstance} from '../lib/axios/axiosInstance.ts'
+
 
 class DivisionService {
 	private readonly DIVISION_ENDPOINT
