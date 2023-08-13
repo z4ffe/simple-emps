@@ -1,7 +1,12 @@
+import {CONSTANTS} from '../constants/constants.ts'
 import {apiInstance} from '../lib/axios/AxiosInstance.ts'
 
 class DivisionService {
-	private DIVISION_ENDPOINT = '/division'
+	private readonly DIVISION_ENDPOINT
+
+	constructor(endpoint: string) {
+		this.DIVISION_ENDPOINT = endpoint
+	}
 
 	async fetchAllDivisions() {
 		const response = await apiInstance.get(this.DIVISION_ENDPOINT)
@@ -9,4 +14,4 @@ class DivisionService {
 	}
 }
 
-export default new DivisionService()
+export default new DivisionService(CONSTANTS.DIVISION)

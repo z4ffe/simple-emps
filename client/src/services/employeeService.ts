@@ -1,9 +1,14 @@
 import {AxiosResponse} from 'axios'
 import {IEmployee} from '../../types/employee.ts'
+import {CONSTANTS} from '../constants/constants.ts'
 import {apiInstance} from '../lib/axios/AxiosInstance.ts'
 
 class EmployeeService {
-	private EMPLOYEE_ENDPOINT = '/employee'
+	private readonly EMPLOYEE_ENDPOINT
+
+	constructor(endpoint: string) {
+		this.EMPLOYEE_ENDPOINT = endpoint
+	}
 
 	async fetchAllEmployees() {
 		const response: AxiosResponse<IEmployee[]> = await apiInstance.get(this.EMPLOYEE_ENDPOINT)
@@ -16,4 +21,4 @@ class EmployeeService {
 	}
 }
 
-export default new EmployeeService()
+export default new EmployeeService(CONSTANTS.EMPLOYEE)
