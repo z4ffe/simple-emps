@@ -66,6 +66,6 @@ export const EmployeesTable: FC<Props> = ({data}) => {
 	]
 
 	return (
-		<Table columns={columns} dataSource={data} />
+		<Table columns={columns} dataSource={data} pagination={{position: ['bottomCenter']}} />
 	)
 }
