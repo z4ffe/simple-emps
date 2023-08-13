@@ -1,9 +1,9 @@
 import {zodResolver} from '@hookform/resolvers/zod'
 import {Button, DatePicker, Form, Input, Select} from 'antd'
 import {Controller, useForm} from 'react-hook-form'
-import {Division} from '../../types/employee.ts'
 import {useDivision} from '../hooks/useDivision.ts'
 import {newEmployeeSchema, NewEmployeeSchemaType} from '../schemas/newEmployee.ts'
+import {Division} from '../types/employee.ts'
 
 export const NewEmployeeForm = () => {
 	const division = useDivision()

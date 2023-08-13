@@ -1,7 +1,7 @@
 import {Button, Space, Table} from 'antd'
 import {ColumnsType} from 'antd/es/table'
 import {FC} from 'react'
-import {IEmployee} from '../../types/employee.ts'
+import {IEmployee} from '../types/employee.ts'
 
 interface Props {
 	data: IEmployee[]

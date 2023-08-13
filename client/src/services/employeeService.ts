@@ -1,7 +1,7 @@
 import {AxiosResponse} from 'axios'
-import {IEmployee} from '../../types/employee.ts'
 import {CONSTANTS} from '../constants/constants.ts'
 import {apiInstance} from '../lib/axios/AxiosInstance.ts'
+import {IEmployee} from '../types/employee.ts'
 
 class EmployeeService {
 	private readonly EMPLOYEE_ENDPOINT
