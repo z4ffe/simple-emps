@@ -2,7 +2,7 @@ import {NextFunction, Request, Response} from 'express'
 import httpStatus from 'http-status'
 import {EmployeeService} from '../service/employee.service'
 
-export const EmployeeController = {
+export const employeeController = {
 	async getAllEmployees(req: Request, res: Response, next: NextFunction) {
 		const allEmployees = await EmployeeService.fetchAllEmployees()
 		if (!allEmployees) {

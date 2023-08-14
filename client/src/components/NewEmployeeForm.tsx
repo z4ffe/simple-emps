@@ -36,7 +36,24 @@ export const NewEmployeeForm = () => {
 					<DatePicker {...field} onChange={field.onChange} />)} />
 			</Form.Item>
 			<Form.Item label='Position' help={errors.position?.message} validateStatus={errors.position ? 'error' : ''} rules={[{required: true}]}>
-				<Controller control={control} name='position' render={({field}) => (
+				<Controller control={control} name='division' render={({field}) => (
+					<Select
+						{...field}
+						disabled={position.isLoading || position.isError}
+						loading={position.isLoading}
+						style={{width: 120}}
+						onChange={field.onChange}
+						defaultValue={'Choose position'}
+						options={position.data ? position.data.map((el: Division) => {
+							return {
+								value: el.id,
+								label: el.division_name,
+							}
+						}) : null}
+					/>)} />
+			</Form.Item>
+			<Form.Item label='Division' help={errors.division?.message} validateStatus={errors.division ? 'error' : ''} rules={[{required: true}]}>
+				<Controller control={control} name='division' render={({field}) => (
 					<Select
 						{...field}
 						disabled={division.isLoading || division.isError}

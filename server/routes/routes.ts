@@ -1,14 +1,18 @@
 import express from 'express'
-import {DivisionController} from '../controller/division.controller'
-import {EmployeeController} from '../controller/employee.controller'
+import {divisionController} from '../controller/divisionController'
+import {employeeController} from '../controller/employeeController'
+import {positionController} from '../controller/position.controller'
 
 const router = express.Router()
 
 router.route('/employee')
-	.get(EmployeeController.getAllEmployees)
-	.post(EmployeeController.addNewEmployee)
+	.get(employeeController.getAllEmployees)
+	.post(employeeController.addNewEmployee)
 
 router.route('/division')
-	.get(DivisionController.getAllDivisions)
+	.get(divisionController.getAllDivisions)
+
+router.route('/position')
+	.get(positionController.getAllPositions)
 
 export default router
