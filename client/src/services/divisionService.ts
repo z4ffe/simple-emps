@@ -3,14 +3,14 @@ import {apiInstance} from '../lib/axios/axiosInstance.ts'
 
 
 class DivisionService {
-	private readonly DIVISION_ENDPOINT
+	private readonly DIVISION_PATH
 
-	constructor(endpoint: string) {
-		this.DIVISION_ENDPOINT = endpoint
+	constructor(path: string) {
+		this.DIVISION_PATH = path
 	}
 
 	async fetchAllDivisions() {
-		const response = await apiInstance.get(this.DIVISION_ENDPOINT)
+		const response = await apiInstance.get(this.DIVISION_PATH)
 		return response.data
 	}
 }

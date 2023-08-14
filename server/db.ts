@@ -9,13 +9,19 @@ import {Project} from './entity/project'
 import {ProjectAssignment} from './entity/projectAssignment'
 import {Region} from './entity/region'
 
+const DB_HOST = process.env.DB_HOST
+const DB_USER = process.env.DB_USER
+const DB_PASSWORD = process.env.DB_PASSWORD
+const DB_NAME = process.env.DB_NAME
+
 export const DBDataSource = new DataSource({
 	type: 'postgres',
-	host: 'ep-orange-bird-24775976.eu-central-1.aws.neon.tech',
-	username: 'z4ffe',
-	password: 'xODFMNKm72vc',
-	database: 'test',
+	host: DB_HOST,
+	username: DB_USER,
+	password: DB_PASSWORD,
+	database: DB_NAME,
 	ssl: true,
 	entities: [Region, City, DivisionType, Division, DivisionAddress, Position, Project, Employee, ProjectAssignment],
 	synchronize: true,
+	logging: false,
 })
