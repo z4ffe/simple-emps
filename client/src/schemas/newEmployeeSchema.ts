@@ -2,12 +2,12 @@ import * as dayjs from 'dayjs'
 import {z} from 'zod'
 
 export const newEmployeeSchema = z.object({
-	firstName: z.string().min(2, 'Name is too short').max(50, 'Name is too long'),
-	middleName: z.string().min(2, 'Name is too short').max(50, 'Name is too long'),
-	lastName: z.string().min(2, 'Name is too short').max(50, 'Name is too long'),
-	hireDate: z.custom((value) => dayjs.isDayjs(value)),
-	position: z.number(),
-	division: z.number(),
+	firstName: z.string({required_error: 'First name is required'}).min(2, 'Name is too short').max(50, 'Name is too long'),
+	middleName: z.string({required_error: 'Middle name is required'}).min(2, 'Name is too short').max(50, 'Name is too long').optional(),
+	lastName: z.string({required_error: 'Last name is required'}).min(2, 'Name is too short').max(50, 'Name is too long'),
+	position: z.number({required_error: 'Position is required'}),
+	division: z.number({required_error: 'Division is required'}),
+	hireDate: z.custom((value) => dayjs.isDayjs(value), 'Hire date is required'),
 })
 
 export type NewEmployeeSchemaType = z.infer<typeof newEmployeeSchema>

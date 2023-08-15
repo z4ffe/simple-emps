@@ -20,6 +20,14 @@ class EmployeeService {
 		const response: AxiosResponse<IEmployee> = await apiInstance.post(this.EMPLOYEE_PATH, data)
 		return response.data
 	}
+
+	async deleteEmployeeById(id: number | null): Promise<IEmployee | Error> {
+		if (!id) {
+			throw new Error()
+		}
+		const response: AxiosResponse<IEmployee> = await apiInstance.delete(`${this.EMPLOYEE_PATH}/${id}`)
+		return response.data
+	}
 }
 
 export default new EmployeeService(API_CONSTANTS.EMPLOYEE)

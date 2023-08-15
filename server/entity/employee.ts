@@ -10,7 +10,7 @@ export class Employee {
 	@Column({length: 50, nullable: false})
 	first_name: string
 
-	@Column({length: 50, nullable: false})
+	@Column({length: 50, nullable: true})
 	middle_name: string
 
 	@Column({length: 50, nullable: false})
