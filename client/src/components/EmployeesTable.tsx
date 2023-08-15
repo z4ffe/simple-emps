@@ -1,7 +1,7 @@
 import {Button, Space, Table} from 'antd'
 import {ColumnsType} from 'antd/es/table'
 import {FC} from 'react'
-import {IEmployee} from '../types/employee.ts'
+import {IEmployee} from '../types/interfaces/employee.ts'
 
 interface Props {
 	data: IEmployee[]
@@ -59,13 +59,13 @@ export const EmployeesTable: FC<Props> = ({data}) => {
 			key: 'action',
 			render: () => (
 				<Space size='middle'>
-					<Button>Edit</Button>
-					<Button danger>Delete</Button>
+					<Button key='button_edit'>Edit</Button>
+					<Button key='button_delete' danger>Delete</Button>
 				</Space>),
 		},
 	]
 
 	return (
-		<Table columns={columns} dataSource={data} pagination={{position: ['bottomCenter']}} />
+		<Table columns={columns} dataSource={data} rowKey={(record) => record.id} pagination={{position: ['bottomCenter']}} />
 	)
 }

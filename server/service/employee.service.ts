@@ -8,12 +8,12 @@ export const EmployeeService = {
 	},
 
 	async addNewEmployee(data: any) {
-		const {first_name, last_name, middle_name, hire_date, division, position} = data
+		const {firstName, lastName, middleName, hireDate, division, position} = data
 		const newEmployee = new Employee()
-		newEmployee.first_name = first_name
-		newEmployee.last_name = last_name
-		newEmployee.middle_name = middle_name
-		newEmployee.hire_date = hire_date
+		newEmployee.first_name = firstName
+		newEmployee.last_name = lastName
+		newEmployee.middle_name = middleName
+		newEmployee.hire_date = hireDate
 		newEmployee.division = division
 		newEmployee.position = position
 		return await DBDataSource.manager.save(newEmployee)

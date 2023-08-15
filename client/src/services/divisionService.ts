@@ -1,5 +1,7 @@
-import {CONSTANTS} from '../constants/constants.ts'
+import {AxiosResponse} from 'axios'
+import {API_CONSTANTS} from '../constants/apiConstants.ts'
 import {apiInstance} from '../lib/axios/axiosInstance.ts'
+import {Division} from '../types/interfaces/division.ts'
 
 
 class DivisionService {
@@ -10,9 +12,9 @@ class DivisionService {
 	}
 
 	async fetchAllDivisions() {
-		const response = await apiInstance.get(this.DIVISION_PATH)
+		const response: AxiosResponse<Division[]> = await apiInstance.get(this.DIVISION_PATH)
 		return response.data
 	}
 }
 
-export default new DivisionService(CONSTANTS.DIVISION)
+export default new DivisionService(API_CONSTANTS.DIVISION)

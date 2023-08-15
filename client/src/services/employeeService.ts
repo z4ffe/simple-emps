@@ -1,7 +1,8 @@
 import {AxiosResponse} from 'axios'
-import {CONSTANTS} from '../constants/constants.ts'
+import {API_CONSTANTS} from '../constants/apiConstants.ts'
 import {apiInstance} from '../lib/axios/axiosInstance.ts'
-import {IEmployee} from '../types/employee.ts'
+import {NewEmployeeSchemaType} from '../schemas/newEmployeeSchema.ts'
+import {IEmployee} from '../types/interfaces/employee.ts'
 
 class EmployeeService {
 	private readonly EMPLOYEE_PATH
@@ -15,10 +16,10 @@ class EmployeeService {
 		return response.data
 	}
 
-	async createNewEmployee(data: unknown) {
+	async createNewEmployee(data: NewEmployeeSchemaType): Promise<IEmployee> {
 		const response: AxiosResponse<IEmployee> = await apiInstance.post(this.EMPLOYEE_PATH, data)
 		return response.data
 	}
 }
 
-export default new EmployeeService(CONSTANTS.EMPLOYEE)
+export default new EmployeeService(API_CONSTANTS.EMPLOYEE)

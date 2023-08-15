@@ -1,7 +1,7 @@
 import axios from 'axios'
-import {CONSTANTS} from '../../constants/constants.ts'
+import {API_CONSTANTS} from '../../constants/apiConstants.ts'
 
 export const apiInstance = axios.create({
-	baseURL: CONSTANTS.HOST_URL,
+	baseURL: API_CONSTANTS.HOST_URL,
 	timeout: 5000,
 })
