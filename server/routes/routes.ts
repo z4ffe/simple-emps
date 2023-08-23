@@ -9,8 +9,8 @@ import {auth} from '../middleware/auth'
 const router = express.Router()
 
 router.route('/employee')
-	.get(auth, employeeController.getAllEmployees)
-	.post(employeeController.addNewEmployee)
+	.get(employeeController.getAllEmployees)
+	.post(auth, employeeController.addNewEmployee)
 
 router.route('/employee/:id')
 	.delete(employeeController.deleteEmployeeById)

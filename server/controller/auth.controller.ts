@@ -19,7 +19,7 @@ export const authController = {
 		if (refreshToken) {
 			await authService.removeSession(refreshToken)
 		}
-		res.status(httpStatus.OK).clearCookie('refresh-token').send({status: 'Logout'})
+		res.status(httpStatus.OK).clearCookie('refresh-token').send({message: 'Logout'})
 	},
 	async refreshTokens(req: Request, res: Response, next: NextFunction) {
 		try {

@@ -17,13 +17,13 @@ export class Employee {
 	last_name: string
 
 	@Column({type: 'date', nullable: false})
-	hire_date: Date
+	hire_date: Date | string
 
 	@ManyToOne(() => Position, position => position.id)
 	@JoinColumn({name: 'position_id'})
-	position: Position
+	position: Position | number
 
 	@ManyToOne(() => Division, division => division.id)
 	@JoinColumn({name: 'division_id'})
-	division: Division
+	division: Division | number
 }

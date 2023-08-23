@@ -1,5 +1,6 @@
 import {DBDataSource} from '../config/db'
 import {Employee} from '../entity/employee'
+import {INewEmployeeContract} from '../types/contracts/newEmployeeContract'
 
 export const EmployeeService = {
 	async findEmployeeById(id: number) {
@@ -14,8 +15,7 @@ export const EmployeeService = {
 		const employeeRepository = DBDataSource.getRepository(Employee)
 		return employeeRepository.find({relations: ['position', 'division', 'division.division_address', 'division.division_type', 'division.division_address.division_city', 'division.division_address.division_city.region']})
 	},
-	async addNewEmployee(data: any) {
-		const {firstName, lastName, middleName, hireDate, division, position} = data
+	async addNewEmployee({firstName, lastName, middleName, hireDate, division, position}: INewEmployeeContract) {
 		const newEmployee = new Employee()
 		newEmployee.first_name = firstName
 		newEmployee.last_name = lastName
