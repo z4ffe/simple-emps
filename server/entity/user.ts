@@ -15,7 +15,4 @@ export class User {
 
 	@Column({length: 50, nullable: false})
 	role: Roles
-
-	@Column({length: 100, nullable: true})
-	refresh_token: string
 }

@@ -8,6 +8,7 @@ import {Position} from '../entity/position'
 import {Project} from '../entity/project'
 import {ProjectAssignment} from '../entity/projectAssignment'
 import {Region} from '../entity/region'
+import {Session} from '../entity/session'
 import {User} from '../entity/user'
 
 const DB_HOST = process.env.DB_HOST
@@ -22,7 +23,7 @@ export const DBDataSource = new DataSource({
 	password: DB_PASSWORD,
 	database: DB_NAME,
 	ssl: true,
-	entities: [Region, City, DivisionType, Division, DivisionAddress, Position, Project, Employee, ProjectAssignment, User],
+	entities: [Region, City, DivisionType, Division, DivisionAddress, Position, Project, Employee, ProjectAssignment, User, Session],
 	synchronize: true,
 	logging: false,
 })

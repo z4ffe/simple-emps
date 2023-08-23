@@ -22,9 +22,16 @@ router.route('/position')
 	.get(positionController.getAllPositions)
 
 router.route('/user')
-	.post(userController.creatNewUser)
+	.post(userController.register)
 
-router.route('/login')
+router.route('/auth/login')
 	.post(authController.login)
+
+router.route('/auth/logout')
+	.get(authController.logout)
+
+router.route('/auth/refresh')
+	.get(authController.refreshTokens)
+
 
 export default router

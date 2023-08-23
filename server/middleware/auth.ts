@@ -7,10 +7,10 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const token = req.headers.authorization
 		if (!token) {
-			throw new ApiError(httpStatus.BAD_REQUEST, 'Wrong or missed token')
+			throw new ApiError(httpStatus.UNAUTHORIZED, 'Wrong or missed token')
 		}
 		verifyAccessToken(token)
-		next()
+		return next()
 	} catch (error) {
 		next(error)
 	}
