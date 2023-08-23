@@ -28,14 +28,14 @@ export const EmployeesTable: FC<Props> = ({data}) => {
 	const employeeDeleteMutation = useMutation({
 		mutationFn: () => employeeService.deleteEmployeeById(employeeId),
 		onSuccess: async () => {
-			await message.warning('Employee successfully deleted')
 			await queryClient.invalidateQueries(['employees'])
 			handleModalClose()
+			await message.warning('Employee successfully deleted')
 		},
 		onError: async () => {
-			await message.error('Something went wrong')
 			await queryClient.invalidateQueries(['employees'])
 			handleModalClose()
+			await message.error('Something went wrong')
 		},
 	})
 

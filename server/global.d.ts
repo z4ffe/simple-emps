@@ -7,6 +7,9 @@ declare global {
 			DB_USER: string
 			DB_PASSWORD: string
 			DB_NAME: string
+			SALT_ROUNDS: string
+			JWT_ACCESS_TOKEN_SECRET: string
+			JWT_REFRESH_TOKEN_SECRET: string
 		}
 	}
 }

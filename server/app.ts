@@ -1,16 +1,19 @@
 import cors from 'cors'
 import 'dotenv/config'
 import express from 'express'
-import {DBDataSource} from './db'
+import {DBDataSource} from './config/db'
+import {handleError} from './middleware/apiError'
 import router from './routes/routes'
 
 const app = express()
 
-app.use(cors())
+app.use(cors({origin: 'http://localhost:5173', credentials: true}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use('/', router)
+app.use(handleError)
 
+//
 
 const PORT = process.env.PORT
 

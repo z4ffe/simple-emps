@@ -23,14 +23,14 @@ export const NewEmployeeForm = () => {
 
 	const addEmployeeMutation = useMutation(
 		(values: NewEmployeeSchemaType) => employeeService.createNewEmployee(values), {
-			onSuccess: (_: unknown, values: NewEmployeeSchemaType) => {
-				void message.success(`Employee ${values.lastName} ${values.firstName} was created`)
-				void queryClient.invalidateQueries(['employees'])
+			onSuccess: async (_: unknown, values: NewEmployeeSchemaType) => {
+				await queryClient.invalidateQueries(['employees'])
 				reset()
+				await message.success(`Employee ${values.lastName} ${values.firstName} was created`)
 			}, onError: () => {
 				void message.error('Something went wrong. Try again later')
-			}, onMutate: () => {
-				void message.loading('Adding new employee...')
+			}, onMutate: async () => {
+				await message.loading('Adding new employee...')
 			},
 		},
 	)
@@ -40,11 +40,11 @@ export const NewEmployeeForm = () => {
 			<Col>
 				<Col>
 					<Row style={{gap: '15px'}}>
-						<Form.Item label='First name' help={errors.firstName?.message} validateStatus={errors.firstName ? 'error' : ''} rules={[{required: true}]}>
+						<Form.Item required label={`First name`} help={errors.firstName?.message} validateStatus={errors.firstName ? 'error' : ''}>
 							<Controller control={control} name='firstName' render={({field}) => (
 								<Input {...field} />)} />
 						</Form.Item>
-						<Form.Item label='Last name' help={errors.lastName?.message} validateStatus={errors.lastName ? 'error' : ''} rules={[{required: true}]}>
+						<Form.Item required label='Last name' help={errors.lastName?.message} validateStatus={errors.lastName ? 'error' : ''} rules={[{required: true}]}>
 							<Controller control={control} name='lastName' render={({field}) => (
 								<Input {...field} />)} />
 						</Form.Item>
@@ -56,7 +56,7 @@ export const NewEmployeeForm = () => {
 							defaultChecked
 							onClick={handleMiddleNameOption}
 						/>
-						<Form.Item style={{margin: 0, width: '75%'}} label='' help={errors.middleName?.message} validateStatus={errors.middleName ? 'error' : ''} rules={[{required: true}]}>
+						<Form.Item required={!middleNameOption} style={{margin: 0, width: '75%'}} help={errors.middleName?.message} validateStatus={errors.middleName ? 'error' : ''}>
 							<Controller control={control} name='middleName' render={({field}) => (
 								<Input disabled={middleNameOption} {...field} />)} />
 						</Form.Item>
@@ -64,7 +64,7 @@ export const NewEmployeeForm = () => {
 				</Col>
 				<Divider />
 				<Col>
-					<Form.Item label='Position' help={errors.position?.message} validateStatus={errors.position ? 'error' : ''} rules={[{required: true}]}>
+					<Form.Item required label='Position' help={errors.position?.message} validateStatus={errors.position ? 'error' : ''}>
 						<Controller control={control} name='position' render={({field}) => (
 							<Select
 								{...field}
@@ -80,7 +80,7 @@ export const NewEmployeeForm = () => {
 								}) : []}
 							/>)} />
 					</Form.Item>
-					<Form.Item label='Division' help={errors.division?.message} validateStatus={errors.division ? 'error' : ''} rules={[{required: true}]}>
+					<Form.Item required label='Division' help={errors.division?.message} validateStatus={errors.division ? 'error' : ''}>
 						<Controller control={control} name='division' render={({field}) => (
 							<Select
 								{...field}
@@ -98,14 +98,33 @@ export const NewEmployeeForm = () => {
 					</Form.Item>
 				</Col>
 				<Divider />
-				<Form.Item label='Hire date' help={<>{errors.hireDate?.message}</>} validateStatus={errors.hireDate ? 'error' : ''} rules={[{required: true}]}>
-					<Controller control={control} name='hireDate' render={({field}) => (
-						<DatePicker {...field} onChange={field.onChange} />)} />
-				</Form.Item>
+				<Row style={{display: 'flex', justifyContent: 'space-between'}}>
+					<Form.Item required label='Hire date' help={<>{errors.hireDate?.message}</>} validateStatus={errors.hireDate ? 'error' : ''}>
+						<Controller control={control} name='hireDate' render={({field}) => (
+							<DatePicker {...field} onChange={field.onChange} />)} />
+					</Form.Item>
+					{/* TODO: Projects business logic */}
+					<Form.Item label='Project' help={errors.project?.message} validateStatus={errors.project ? 'error' : ''}>
+						<Controller control={control} name='project' render={({field}) => (
+							<Select
+								{...field}
+								//disabled={division.isLoading || division.isError}
+								//loading={division.isLoading}
+								//onChange={field.onChange}
+								defaultValue={'Choose project'}
+								/* options={division.data ? division.data.map((el) => {
+									return {
+										value: el.id,
+										label: el.division_name,
+									}
+								}) : []} */
+							/>)} />
+					</Form.Item>
+				</Row>
 				<Divider />
-				<Col style={{display: 'flex', gap: '10px', justifyContent: 'right'}}>
+				<Col style={{display: 'flex', gap: '10px', justifyContent: 'center'}}>
 					<Button disabled={!isValid} type='primary' htmlType='submit'>Add employee</Button>
-					<Button disabled={!isDirty} type='default' onClick={() => reset()}>Clear form</Button>
+					<Button disabled={!isDirty} type='dashed' onClick={() => reset()}>Clear form</Button>
 				</Col>
 			</Col>
 		</Form>

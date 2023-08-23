@@ -1,4 +1,4 @@
-import {DBDataSource} from '../db'
+import {DBDataSource} from '../config/db'
 import {Division} from '../entity/division'
 
 export const DivisionService = {

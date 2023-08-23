@@ -1,4 +1,4 @@
-import {DBDataSource} from '../db'
+import {DBDataSource} from '../config/db'
 import {Position} from '../entity/position'
 
 export const positionService = {

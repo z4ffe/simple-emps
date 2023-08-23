@@ -8,6 +8,7 @@ export const newEmployeeSchema = z.object({
 	position: z.number({required_error: 'Position is required'}),
 	division: z.number({required_error: 'Division is required'}),
 	hireDate: z.custom((value) => dayjs.isDayjs(value), 'Hire date is required'),
+	project: z.number().optional(),
 })
 
 export type NewEmployeeSchemaType = z.infer<typeof newEmployeeSchema>

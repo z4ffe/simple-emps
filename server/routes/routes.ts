@@ -1,7 +1,9 @@
 import express from 'express'
-import {divisionController} from '../controller/divisionController'
-import {employeeController} from '../controller/employeeController'
+import {authController} from '../controller/auth.controller'
+import {divisionController} from '../controller/division.controller'
+import {employeeController} from '../controller/employee.controller'
 import {positionController} from '../controller/position.controller'
+import {userController} from '../controller/user.controller'
 
 const router = express.Router()
 
@@ -17,5 +19,11 @@ router.route('/division')
 
 router.route('/position')
 	.get(positionController.getAllPositions)
+
+router.route('/user')
+	.post(userController.creatNewUser)
+
+router.route('/login')
+	.post(authController.login)
 
 export default router
