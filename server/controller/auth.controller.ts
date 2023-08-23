@@ -8,8 +8,12 @@ export const authController = {
 	async login(req: Request, res: Response, next: NextFunction) {
 		try {
 			const {login, password} = req.body
-			const tokens = await authService.login(login, password)
-			res.status(httpStatus.OK).cookie('refresh-token', tokens.refreshToken, {maxAge: REFRESH_TOKEN_AGE}).json({accessToken: tokens.accessToken})
+			const data = await authService.login(login, password)
+			res.status(httpStatus.OK).cookie('refresh-token', data.tokens.refreshToken, {maxAge: REFRESH_TOKEN_AGE}).json({
+				accessToken: data.tokens.accessToken,
+				login: data.login,
+				role: data.role,
+			})
 		} catch (error) {
 			next(error)
 		}
@@ -19,7 +23,7 @@ export const authController = {
 		if (refreshToken) {
 			await authService.removeSession(refreshToken)
 		}
-		res.status(httpStatus.OK).clearCookie('refresh-token').send({message: 'Logout'})
+		res.status(httpStatus.OK).clearCookie('refresh-token').send({status: 'Logout'})
 	},
 	async refreshTokens(req: Request, res: Response, next: NextFunction) {
 		try {

@@ -23,13 +23,13 @@ export const authService = {
 		if (sessionExist) {
 			sessionExist.refresh_token = tokens.refreshToken
 			await DBDataSource.manager.save(sessionExist)
-			return tokens
+			return {tokens, login: user.login, role: user.role}
 		}
 		const newSession = new Session()
 		newSession.userId = user
 		newSession.refresh_token = tokens.refreshToken
 		await DBDataSource.manager.save(newSession)
-		return tokens
+		return {tokens, login: user.login, role: user.role}
 	},
 	async refreshAccessToken(refreshToken: string) {
 		try {

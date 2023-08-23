@@ -4,8 +4,10 @@ import {Button, message, Modal, Space, Table} from 'antd'
 import {ColumnsType} from 'antd/es/table'
 import {FC, useState} from 'react'
 import {SITE_CONSTANTS} from '../constants/siteConstants.ts'
+import {useAppSelector} from '../lib/redux/typedHooks.ts'
 import employeeService from '../services/employeeService.ts'
 import {IEmployee} from '../types/interfaces/employee.ts'
+import {Roles} from '../types/roles.ts'
 
 interface Props {
 	data: IEmployee[]
@@ -14,6 +16,7 @@ interface Props {
 export const EmployeesTable: FC<Props> = ({data}) => {
 	const [deleteModal, setDeleteModal] = useState(false)
 	const [employeeId, setEmployeeId] = useState<number | null>(null)
+	const role = useAppSelector(state => state.userReducer.role)
 
 	const handleModalOpen = (id: number) => {
 		setEmployeeId(+id)
@@ -85,8 +88,8 @@ export const EmployeesTable: FC<Props> = ({data}) => {
 			key: 'action',
 			render: (record: IEmployee) => (
 				<Space size='middle'>
-					<Button key='button_edit'>Edit</Button>
-					<Button key='button_delete' onClick={() => handleModalOpen(record.id)}>Delete</Button>
+					{role === Roles.ADMIN || role === Roles.MODERATOR ? <Button key='button_edit'>Edit</Button> : <span>-</span>}
+					{role === Roles.ADMIN ? <Button key='button_delete' onClick={() => handleModalOpen(record.id)}>Delete</Button> : null}
 				</Space>),
 		},
 	]
