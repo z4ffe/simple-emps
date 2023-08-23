@@ -93,7 +93,7 @@ export const EmployeesTable: FC<Props> = ({data}) => {
 
 	return (
 		<>
-			<Table columns={columns} dataSource={data} rowKey={(record) => record.id} pagination={{position: ['bottomCenter']}} />
+			<Table style={{margin: '40px 0 0 0'}} columns={columns} dataSource={data} rowKey={(record) => record.id} pagination={{position: ['bottomCenter']}} />
 			<Modal
 				title={<><ExclamationCircleOutlined style={{color: 'red', fontSize: '20px'}} /><h3>{SITE_CONSTANTS.EMPLOYEE_DELETE_MODAL.TITLE}</h3></>}
 				open={deleteModal}
