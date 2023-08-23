@@ -4,11 +4,12 @@ import {divisionController} from '../controller/division.controller'
 import {employeeController} from '../controller/employee.controller'
 import {positionController} from '../controller/position.controller'
 import {userController} from '../controller/user.controller'
+import {auth} from '../middleware/auth'
 
 const router = express.Router()
 
 router.route('/employee')
-	.get(employeeController.getAllEmployees)
+	.get(auth, employeeController.getAllEmployees)
 	.post(employeeController.addNewEmployee)
 
 router.route('/employee/:id')
