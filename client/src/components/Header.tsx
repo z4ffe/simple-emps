@@ -7,8 +7,8 @@ import {nameFormat} from '../utils/nameFormat.ts'
 import {LoginModal} from './LoginModal.tsx'
 
 export const Header = () => {
-	const isAuth = useAppSelector(state => state.userReducer.isAuth)
-	const loginName = useAppSelector(state => state.userReducer.login)
+	const isAuth = useAppSelector(state => state.user.isAuth)
+	const loginName = useAppSelector(state => state.user.login)
 	const [loginModal, setLoginModal] = useState(false)
 
 	const openLoginModal = () => setLoginModal(true)

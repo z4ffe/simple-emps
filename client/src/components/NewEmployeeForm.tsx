@@ -53,12 +53,12 @@ export const NewEmployeeForm = () => {
 						<Switch
 							checkedChildren='Middle name:'
 							unCheckedChildren='Middle name'
-							defaultChecked
+							defaultChecked={false}
 							onClick={handleMiddleNameOption}
 						/>
 						<Form.Item required={!middleNameOption} style={{margin: 0, width: '75%'}} help={errors.middleName?.message} validateStatus={errors.middleName ? 'error' : ''}>
 							<Controller control={control} name='middleName' render={({field}) => (
-								<Input disabled={middleNameOption} {...field} />)} />
+								<Input disabled={!middleNameOption} {...field} />)} />
 						</Form.Item>
 					</Row>
 				</Col>

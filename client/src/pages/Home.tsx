@@ -11,7 +11,7 @@ import {Roles} from '../types/roles.ts'
 
 export const Home = () => {
 	const [newEmployeeModal, setNewEmployeeModal] = useState(false)
-	const role = useAppSelector(state => state.userReducer.role)
+	const role = useAppSelector(state => state.user.role)
 	const employees = useEmployee()
 	const navigate = useNavigate()
 

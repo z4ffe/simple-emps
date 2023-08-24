@@ -3,4 +3,8 @@ export const API_CONSTANTS = {
 	EMPLOYEE: 'employee',
 	DIVISION: 'division',
 	POSITION: 'position',
+	AUTH: {
+		LOGIN: '/auth/login',
+		REFRESH: '/auth/refresh',
+	},
 }

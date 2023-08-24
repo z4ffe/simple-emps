@@ -2,7 +2,9 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import 'dotenv/config'
 import express from 'express'
+import expressWinston from 'express-winston'
 import {DBDataSource} from './config/db'
+import {logger} from './config/logger'
 import {handleError} from './middleware/apiError'
 import router from './routes/routes'
 
@@ -13,6 +15,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cookieParser())
 app.use('/', router)
+app.use(expressWinston.logger({winstonInstance: logger, statusLevels: true}))
 app.use(handleError)
 
 //

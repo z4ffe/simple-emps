@@ -1,5 +1,5 @@
 import store from '../store/store.ts'
 
 export const getAccessToken = () => {
-	return store.getState().userReducer.accessToken
+	return store.getState().user.accessToken
 }

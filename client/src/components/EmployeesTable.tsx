@@ -16,7 +16,7 @@ interface Props {
 export const EmployeesTable: FC<Props> = ({data}) => {
 	const [deleteModal, setDeleteModal] = useState(false)
 	const [employeeId, setEmployeeId] = useState<number | null>(null)
-	const role = useAppSelector(state => state.userReducer.role)
+	const role = useAppSelector(state => state.user.role)
 
 	const handleModalOpen = (id: number) => {
 		setEmployeeId(+id)
