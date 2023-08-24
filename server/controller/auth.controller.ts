@@ -9,7 +9,7 @@ export const authController = {
 		try {
 			const {login, password} = req.body
 			const data = await authService.login(login, password)
-			res.status(httpStatus.OK).cookie('refresh-token', data.tokens.refreshToken, {maxAge: REFRESH_TOKEN_AGE}).json({
+			res.status(httpStatus.OK).cookie('refresh-token', data.tokens.refreshToken, {maxAge: REFRESH_TOKEN_AGE, httpOnly: true}).json({
 				accessToken: data.tokens.accessToken,
 				login: data.login,
 				role: data.role,
@@ -30,7 +30,7 @@ export const authController = {
 			const refreshToken = req.cookies['refresh-token']
 			const tokens = await authService.refreshAccessToken(refreshToken)
 			if (tokens) {
-				res.status(httpStatus.OK).cookie('refresh-token', tokens.refreshToken, {maxAge: REFRESH_TOKEN_AGE}).json({accessToken: tokens.accessToken})
+				res.status(httpStatus.OK).cookie('refresh-token', tokens.refreshToken, {maxAge: REFRESH_TOKEN_AGE, httpOnly: true}).json({accessToken: tokens.accessToken})
 			} else {
 				throw new ApiError(httpStatus.BAD_REQUEST, 'Something went wrong')
 			}

@@ -36,4 +36,5 @@ apiInstance.interceptors.response.use(
 				throw new AxiosError('Unauthorized', '400')
 			}
 		}
+		throw error
 	})
