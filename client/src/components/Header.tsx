@@ -1,14 +1,18 @@
 import {Button, Col, Image, Typography} from 'antd'
+import {useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import logo from '../assets/images/logo.png'
-import {useAppDispatch, useAppSelector} from '../lib/redux/typedHooks.ts'
-import {login} from '../store/user/userThunk.ts'
+import {useAppSelector} from '../lib/redux/typedHooks.ts'
 import {nameFormat} from '../utils/nameFormat.ts'
+import {LoginModal} from './LoginModal.tsx'
 
 export const Header = () => {
 	const isAuth = useAppSelector(state => state.userReducer.isAuth)
 	const loginName = useAppSelector(state => state.userReducer.login)
-	const dispatch = useAppDispatch()
+	const [loginModal, setLoginModal] = useState(false)
+
+	const openLoginModal = () => setLoginModal(true)
+	const closeLoginModal = () => setLoginModal(false)
 
 	return (
 		<div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1920px', margin: '20px auto'}}>
@@ -24,9 +28,10 @@ export const Header = () => {
 				</Col>
 				:
 				<Col style={{display: 'flex', gap: '10px'}}>
-					<Button onClick={() => dispatch(login())}>Log in</Button>
+					<Button onClick={openLoginModal}>Log in</Button>
 					<Button>Sign up</Button>
 				</Col>}
+			<LoginModal loginModal={loginModal} closeLoginModal={closeLoginModal} />
 		</div>
 	)
 }

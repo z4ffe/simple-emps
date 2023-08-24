@@ -6,7 +6,7 @@ import {DesktopLayout} from './layouts/DesktopLayout.tsx'
 import {useAppDispatch} from './lib/redux/typedHooks.ts'
 import {Router} from './routes/Router.tsx'
 import {login} from './store/user/userThunk.ts'
-import {getRefreshTokenFromCookies} from './utils/cookies.ts'
+import {getRefreshTokenFromCookies} from './utils/cookiesService.ts'
 
 const queryClient = new QueryClient()
 

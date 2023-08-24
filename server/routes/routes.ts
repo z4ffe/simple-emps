@@ -13,7 +13,7 @@ router.route('/employee')
 	.post(auth, employeeController.addNewEmployee)
 
 router.route('/employee/:id')
-	.delete(employeeController.deleteEmployeeById)
+	.delete(auth, employeeController.deleteEmployeeById)
 
 router.route('/division')
 	.get(divisionController.getAllDivisions)

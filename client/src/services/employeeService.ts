@@ -3,7 +3,7 @@ import {API_CONSTANTS} from '../constants/apiConstants.ts'
 import {apiInstance} from '../lib/axios/axiosInstance.ts'
 import {NewEmployeeSchemaType} from '../schemas/newEmployeeSchema.ts'
 import {IEmployee} from '../types/interfaces/employee.ts'
-import {getAccessToken} from '../utils/cookies.ts'
+import {getAccessToken} from '../utils/reduxService.ts'
 
 class EmployeeService {
 	private readonly EMPLOYEE_PATH
@@ -30,7 +30,11 @@ class EmployeeService {
 		if (!id) {
 			throw new Error()
 		}
-		const response: AxiosResponse<IEmployee> = await apiInstance.delete(`${this.EMPLOYEE_PATH}/${id}`)
+		const response: AxiosResponse<IEmployee> = await apiInstance.delete(`${this.EMPLOYEE_PATH}/${id}`, {
+			headers: {
+				'Authorization': `Bearer ${getAccessToken()}`,
+			},
+		})
 		return response.data
 	}
 }
