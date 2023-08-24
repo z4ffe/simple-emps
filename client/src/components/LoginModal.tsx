@@ -23,7 +23,7 @@ export const LoginModal: FC<Props> = ({loginModal, closeLoginModal}) => {
 			confirmLoading={formLoading}
 			onCancel={closeLoginModal}
 		>
-			<LoginForm form={form} handleFormLoading={handleFormLoading} />
+			<LoginForm form={form} handleFormLoading={handleFormLoading} closeLoginModal={closeLoginModal} />
 		</Modal>
 	)
 }
