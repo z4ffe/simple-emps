@@ -1,22 +1,16 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import {notification} from 'antd'
-import axios, {AxiosResponse} from 'axios'
-import {apiInstance} from '../../lib/axios/axiosInstance.ts'
+import {AxiosError, AxiosResponse} from 'axios'
 import {LoginSchemaType} from '../../schemas/loginSchema.ts'
+import authService from '../../services/authService.ts'
 import {ILogin} from '../../types/contracts/login.ts'
 
 export const login = createAsyncThunk('user/login', async ({login, password}: LoginSchemaType) => {
 	try {
-		const response: AxiosResponse<ILogin> = await apiInstance.post('/auth/login', {
-			login,
-			password,
-		}, {
-			withCredentials: true,
-		})
+		const response: AxiosResponse<ILogin> = await authService.login({login, password})
 		return response.data
 	} catch (error) {
-		console.log(error)
-		if (axios.isAxiosError(error)) {
+		if (error instanceof AxiosError) {
 			notification.error({message: error?.response?.data.message, duration: 3})
 			throw error
 		} else {

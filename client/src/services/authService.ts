@@ -13,16 +13,10 @@ class AuthService {
 	}
 
 	async login({login, password}: LoginSchemaType): Promise<AxiosResponse<ILogin>> {
-		try {
-			return apiInstance.post(this.AUTH_PATH.LOGIN, {
-				login,
-				password,
-			}, {
-				withCredentials: true,
-			})
-		} catch (error) {
-			throw error
-		}
+		return await apiInstance.post(this.AUTH_PATH.LOGIN, {
+			login,
+			password,
+		})
 	}
 
 	async refreshToken(): Promise<AxiosResponse<Pick<ILogin, 'accessToken'>>> {

@@ -1,20 +1,22 @@
 import {KeyOutlined, UserOutlined} from '@ant-design/icons'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {Form, FormInstance, Input, notification} from 'antd'
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import {Controller, useForm} from 'react-hook-form'
 import {useAppDispatch} from '../lib/redux/typedHooks.ts'
 import {loginSchema, LoginSchemaType} from '../schemas/loginSchema.ts'
 import {login} from '../store/user/userThunk.ts'
+import {AuthTypeSwitch} from '../types/AuthTypeSwitch.ts'
 
 interface Props {
 	form: FormInstance
 	handleFormLoading: (value: boolean) => void
 	closeLoginModal: () => void
+	authType: AuthTypeSwitch
 }
 
-export const LoginForm: FC<Props> = ({form, handleFormLoading, closeLoginModal}) => {
-	const {control, handleSubmit, formState: {errors}, reset} = useForm<LoginSchemaType>({resolver: zodResolver(loginSchema)})
+export const AuthForm: FC<Props> = ({form, handleFormLoading, closeLoginModal, authType}) => {
+	const {control, handleSubmit, formState: {errors}, reset, setError} = useForm<LoginSchemaType>({resolver: zodResolver(loginSchema)})
 	const dispatch = useAppDispatch()
 
 	const formSubmit = async (values: LoginSchemaType) => {
@@ -28,10 +30,12 @@ export const LoginForm: FC<Props> = ({form, handleFormLoading, closeLoginModal})
 
 		} catch (error) {
 			handleFormLoading(false)
-			reset()
+			setError('login', {type: 'custom', message: ''})
+			setError('password', {type: 'custom', message: ''})
 		}
-
 	}
+
+	useEffect(() => reset(), [authType, reset])
 
 	return (
 		<Form form={form} onFinish={handleSubmit(formSubmit)}>

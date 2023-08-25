@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 import logo from '../assets/images/logo.png'
 import {useAppSelector} from '../lib/redux/typedHooks.ts'
 import {nameFormat} from '../utils/nameFormat.ts'
-import {LoginModal} from './LoginModal.tsx'
+import {AuthModal} from './AuthModal.tsx'
 
 export const Header = () => {
 	const isAuth = useAppSelector(state => state.user.isAuth)
@@ -31,7 +31,7 @@ export const Header = () => {
 					<Button onClick={openLoginModal}>Log in</Button>
 					<Button>Sign up</Button>
 				</Col>}
-			<LoginModal loginModal={loginModal} closeLoginModal={closeLoginModal} />
+			<AuthModal loginModal={loginModal} closeLoginModal={closeLoginModal} />
 		</div>
 	)
 }
