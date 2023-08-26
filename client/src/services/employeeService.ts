@@ -1,7 +1,7 @@
 import {AxiosResponse} from 'axios'
 import {API_CONSTANTS} from '../constants/apiConstants.ts'
 import {apiInstance} from '../lib/axios/axiosInstance.ts'
-import {NewEmployeeSchemaType} from '../schemas/newEmployeeSchema.ts'
+import {NewEmployeeSchemaType} from '../schemas/employeeSchema.ts'
 import {IEmployee} from '../types/interfaces/employee.ts'
 import {getAccessToken} from '../utils/getAccessTokenFromRedux.ts'
 

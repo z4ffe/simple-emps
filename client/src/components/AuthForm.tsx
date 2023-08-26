@@ -6,16 +6,16 @@ import {Controller, useForm} from 'react-hook-form'
 import {useAppDispatch} from '../lib/redux/typedHooks.ts'
 import {loginSchema, LoginSchemaType} from '../schemas/loginSchema.ts'
 import {login} from '../store/user/userThunk.ts'
-import {AuthTypeSwitch} from '../types/AuthTypeSwitch.ts'
+import {IAuthModalSwitch} from '../types/AuthTypeSwitch.ts'
 
 interface Props {
 	form: FormInstance
 	handleFormLoading: (value: boolean) => void
 	closeLoginModal: () => void
-	authType: AuthTypeSwitch
+	authModal: IAuthModalSwitch
 }
 
-export const AuthForm: FC<Props> = ({form, handleFormLoading, closeLoginModal, authType}) => {
+export const AuthForm: FC<Props> = ({form, handleFormLoading, closeLoginModal, authModal}) => {
 	const {control, handleSubmit, formState: {errors}, reset, setError} = useForm<LoginSchemaType>({resolver: zodResolver(loginSchema)})
 	const dispatch = useAppDispatch()
 
@@ -35,7 +35,7 @@ export const AuthForm: FC<Props> = ({form, handleFormLoading, closeLoginModal, a
 		}
 	}
 
-	useEffect(() => reset(), [authType, reset])
+	useEffect(() => reset(), [authModal.type, reset])
 
 	return (
 		<Form form={form} onFinish={handleSubmit(formSubmit)}>
@@ -47,6 +47,12 @@ export const AuthForm: FC<Props> = ({form, handleFormLoading, closeLoginModal, a
 				<Controller control={control} name='password' render={({field}) => (
 					<Input.Password placeholder='Enter your password...' addonBefore='Password:' addonAfter={<KeyOutlined />} {...field} />)} />
 			</Form.Item>
+			{/* {authModal.type === 'reg' ? <Form.Item required help={errors.confirmPassword?.message} validateStatus={errors.confirmPassword ? 'error' : ''}>
+				<Controller control={control} name='confirmPassword' render={({field}) => (
+					<Input.Password disabled={authModal.type !== 'reg'} placeholder='Confirm your password...'
+										 addonBefore={<span style={{display: 'block', textAlign: 'left', width: '65px'}}>Confirm:</span>}
+										 addonAfter={<KeyOutlined />} {...field} />)} />
+			</Form.Item> : null} */}
 		</Form>
 	)
 }

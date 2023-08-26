@@ -25,6 +25,9 @@ const userSlice = createSlice({
 		setAccessToken: (state, action) => {
 			state.accessToken = action.payload
 		},
+		logout: () => {
+			return initialState
+		},
 	},
 	extraReducers: builder => {
 		builder.addCase(login.pending, (state) => {

@@ -16,6 +16,8 @@ class AuthService {
 		return await apiInstance.post(this.AUTH_PATH.LOGIN, {
 			login,
 			password,
+		}, {
+			withCredentials: true,
 		})
 	}
 
@@ -26,7 +28,9 @@ class AuthService {
 	}
 
 	async logout(): Promise<void> {
-		return await apiInstance.get(this.AUTH_PATH.LOGOUT)
+		return await apiInstance.get(this.AUTH_PATH.LOGOUT, {
+			withCredentials: true,
+		})
 	}
 }
 

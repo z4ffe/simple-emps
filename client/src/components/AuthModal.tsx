@@ -18,10 +18,9 @@ export const AuthModal: FC<Props> = ({authModal, closeAuthModal, switchAuthType}
 	const handleForm = () => form.submit()
 	const handleFormLoading = (value: boolean) => setFormLoading(value)
 
-	console.log(authModal.type)
-
 	return (
 		<Modal
+			destroyOnClose={true}
 			centered
 			title={<h1 style={{textAlign: 'center', margin: '0 auto 20px', fontSize: '1.2rem'}}>{SITE_CONSTANTS.AUTH_FORM.TITLE(authModal.type)}</h1>}
 			open={authModal.status}
@@ -38,9 +37,9 @@ export const AuthModal: FC<Props> = ({authModal, closeAuthModal, switchAuthType}
 			]}
 		>
 			<Space style={{display: 'flex', width: '100%', justifyContent: 'center', margin: '0 auto 25px'}}>
-				<AuthSwitcher switchAuthType={switchAuthType} />
+				<AuthSwitcher authModal={authModal} switchAuthType={switchAuthType} />
 			</Space>
-			<AuthForm form={form} handleFormLoading={handleFormLoading} closeLoginModal={closeAuthModal} authType={authModal.type} />
+			<AuthForm form={form} handleFormLoading={handleFormLoading} closeLoginModal={closeAuthModal} authModal={authModal} />
 		</Modal>
 	)
 }

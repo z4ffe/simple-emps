@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs'
 import {z} from 'zod'
 
-export const newEmployeeSchema = z.object({
+export const employeeSchema = z.object({
 	firstName: z.string({required_error: 'First name is required'}).min(2, 'Name is too short').max(50, 'Name is too long'),
 	middleName: z.string({required_error: 'Middle name is required'}).min(2, 'Name is too short').max(50, 'Name is too long').optional(),
 	lastName: z.string({required_error: 'Last name is required'}).min(2, 'Name is too short').max(50, 'Name is too long'),
@@ -11,4 +11,4 @@ export const newEmployeeSchema = z.object({
 	project: z.number().optional(),
 })
 
-export type NewEmployeeSchemaType = z.infer<typeof newEmployeeSchema>
+export type NewEmployeeSchemaType = z.infer<typeof employeeSchema>

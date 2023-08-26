@@ -5,7 +5,7 @@ import {useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
 import {useDivision} from '../hooks/useDivision.ts'
 import {usePosition} from '../hooks/usePosition.ts'
-import {newEmployeeSchema, NewEmployeeSchemaType} from '../schemas/newEmployeeSchema.ts'
+import {employeeSchema, NewEmployeeSchemaType} from '../schemas/employeeSchema.ts'
 import employeeService from '../services/employeeService.ts'
 
 
@@ -18,7 +18,7 @@ export const NewEmployeeForm = () => {
 	const handleMiddleNameOption = () => setMiddleNameOption(prevState => !prevState)
 
 	const {control, handleSubmit, formState: {errors, isDirty, isValid}, reset} = useForm<NewEmployeeSchemaType>({
-		resolver: zodResolver(newEmployeeSchema),
+		resolver: zodResolver(employeeSchema),
 	})
 
 	const addEmployeeMutation = useMutation(
