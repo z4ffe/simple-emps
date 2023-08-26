@@ -1,6 +1,6 @@
 import {KeyOutlined, UserOutlined} from '@ant-design/icons'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {Form, FormInstance, Input, notification} from 'antd'
+import {Form, FormInstance, Input, message} from 'antd'
 import {FC, useEffect} from 'react'
 import {Controller, useForm} from 'react-hook-form'
 import {useAppDispatch} from '../lib/redux/typedHooks.ts'
@@ -24,9 +24,9 @@ export const AuthForm: FC<Props> = ({form, handleFormLoading, closeLoginModal, a
 			handleFormLoading(true)
 			await dispatch(login(values)).unwrap()
 			handleFormLoading(false)
-			notification.success({message: 'You are logged in', duration: 3})
 			reset()
 			closeLoginModal()
+			await message.success('You are logged in')
 
 		} catch (error) {
 			handleFormLoading(false)

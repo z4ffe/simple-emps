@@ -1,5 +1,5 @@
 import {LoginOutlined, LogoutOutlined, UserAddOutlined} from '@ant-design/icons'
-import {Button, Col, Image, Typography} from 'antd'
+import {Button, Col, Image, message, Typography} from 'antd'
 import {SyntheticEvent, useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import logo from '../assets/images/logo.png'
@@ -41,6 +41,7 @@ export const Header = () => {
 		await authService.logout()
 		dispatch(userActions.logout())
 		setLogoutLoading(false)
+		await message.warning('Successfully logout')
 	}
 
 	return (
