@@ -15,7 +15,7 @@ export const SITE_CONSTANTS = {
 		LAST_NAME: 'Last name',
 	},
 	AUTH_FORM: {
-		TITLE: (value: string): string => value === 'login' ? 'Login' : value === 'reg' ? 'Register' : '',
+		TITLE: (value: string): string => value === 'login' ? 'Login to your account' : value === 'reg' ? 'Register new account' : '',
 		SUBMIT_BUTTON: (value: string): string => value === 'login' ? 'Login' : value === 'reg' ? 'Register' : '',
 	},
 }

@@ -3,7 +3,7 @@ import {API_CONSTANTS} from '../constants/apiConstants.ts'
 import {apiInstance} from '../lib/axios/axiosInstance.ts'
 import {NewEmployeeSchemaType} from '../schemas/newEmployeeSchema.ts'
 import {IEmployee} from '../types/interfaces/employee.ts'
-import {getAccessToken} from '../utils/reduxService.ts'
+import {getAccessToken} from '../utils/getAccessTokenFromRedux.ts'
 
 class EmployeeService {
 	private readonly EMPLOYEE_PATH

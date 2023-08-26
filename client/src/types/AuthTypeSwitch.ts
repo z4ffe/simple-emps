@@ -1,1 +1,4 @@
-export type AuthTypeSwitch = 'login' | 'reg'
+export interface IAuthModalSwitch {
+	status: boolean,
+	type: 'login' | 'reg'
+}

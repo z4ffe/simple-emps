@@ -3,6 +3,7 @@ import {useMutation, useQueryClient} from '@tanstack/react-query'
 import {Button, message, Modal, Space, Table} from 'antd'
 import {ColumnsType} from 'antd/es/table'
 import {FC, useState} from 'react'
+import '../assets/styles/custom.css'
 import {SITE_CONSTANTS} from '../constants/siteConstants.ts'
 import {useAppSelector} from '../lib/redux/typedHooks.ts'
 import employeeService from '../services/employeeService.ts'
@@ -86,6 +87,7 @@ export const EmployeesTable: FC<Props> = ({data}) => {
 		{
 			title: 'Action',
 			key: 'action',
+			className: role === Roles.USER || !role ? 'hidden-class' : '',
 			render: (record: IEmployee) => (
 				<Space size='middle'>
 					{role === Roles.ADMIN || role === Roles.MODERATOR ? <Button key='button_edit'>Edit</Button> : <span>-</span>}

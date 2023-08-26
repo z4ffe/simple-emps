@@ -6,5 +6,8 @@ export const API_CONSTANTS = {
 	AUTH: {
 		LOGIN: '/auth/login',
 		REFRESH: '/auth/refresh',
+		LOGOUT: '/auth/logout',
 	},
 }
+
+export type ApiConstantsType = typeof API_CONSTANTS

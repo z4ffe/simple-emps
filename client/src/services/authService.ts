@@ -1,5 +1,5 @@
 import {AxiosResponse} from 'axios'
-import {API_CONSTANTS} from '../constants/apiConstants.ts'
+import {API_CONSTANTS, ApiConstantsType} from '../constants/apiConstants.ts'
 import {apiInstance} from '../lib/axios/axiosInstance.ts'
 import {LoginSchemaType} from '../schemas/loginSchema.ts'
 import {ILogin} from '../types/contracts/login.ts'
@@ -8,7 +8,7 @@ import {ILogin} from '../types/contracts/login.ts'
 class AuthService {
 	private readonly AUTH_PATH
 
-	constructor(path: {LOGIN: string, REFRESH: string}) {
+	constructor(path: ApiConstantsType['AUTH']) {
 		this.AUTH_PATH = path
 	}
 
@@ -23,6 +23,10 @@ class AuthService {
 		return await apiInstance.get(this.AUTH_PATH.REFRESH, {
 			withCredentials: true,
 		})
+	}
+
+	async logout(): Promise<void> {
+		return await apiInstance.get(this.AUTH_PATH.LOGOUT)
 	}
 }
 
