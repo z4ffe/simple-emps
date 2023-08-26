@@ -15,6 +15,7 @@ export const Header = () => {
 	const loginName = useAppSelector(state => state.user.login)
 	const [authModal, setAuthModal] = useState<IAuthModalSwitch>({status: false, type: 'login'})
 	const dispatch = useAppDispatch()
+	const [logoutLoading, setLogoutLoading] = useState(false)
 
 	const openAuthModal = (event: SyntheticEvent) => {
 		if (!event.currentTarget.getAttribute('data-type')) return
@@ -35,9 +36,11 @@ export const Header = () => {
 		})
 	}
 
-	const handleLogout = () => {
+	const handleLogout = async () => {
+		setLogoutLoading(true)
+		await authService.logout()
 		dispatch(userActions.logout())
-		void authService.logout()
+		setLogoutLoading(false)
 	}
 
 	return (
@@ -50,7 +53,7 @@ export const Header = () => {
 			{isAuth ?
 				<Col style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
 					<Typography style={{fontWeight: '500', fontSize: '1rem'}}>Hello, {nameFormat(loginName)}</Typography>
-					<Button onClick={handleLogout} icon={<LogoutOutlined />} style={{fontWeight: '500'}}>Log out</Button>
+					<Button loading={logoutLoading} onClick={handleLogout} icon={<LogoutOutlined />} style={{fontWeight: '500'}}>Log out</Button>
 				</Col>
 				:
 				<Col style={{display: 'flex', gap: '10px'}}>
