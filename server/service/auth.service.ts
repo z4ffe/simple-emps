@@ -12,24 +12,20 @@ export const authService = {
 	async login(login: string, password: string) {
 		const user = await userService.findUserByLogin(login)
 		if (!user) {
-			throw new ApiError(httpStatus.BAD_REQUEST, 'Wrong login or password')
+			throw new ApiError(httpStatus.BAD_REQUEST, 'User with this login not exist')
 		}
 		const comparePassword = await verifyPassword(password, user.password)
 		if (!comparePassword) {
-			throw new ApiError(httpStatus.BAD_REQUEST, 'Wrong login or password')
+			throw new ApiError(httpStatus.BAD_REQUEST, 'Wrong password')
 		}
 		const tokens = generateTokens(login, user.role)
 		const sessionExist = await sessionService.findSessionByUser(user)
 		if (sessionExist) {
-			sessionExist.refresh_token = tokens.refreshToken
-			await DBDataSource.manager.save(sessionExist)
-			return {tokens, login: user.login, role: user.role}
+			await sessionService.creatSession(user, tokens, sessionExist)
+			return {tokens, user}
 		}
-		const newSession = new Session()
-		newSession.userId = user
-		newSession.refresh_token = tokens.refreshToken
-		await DBDataSource.manager.save(newSession)
-		return {tokens, login: user.login, role: user.role}
+		await sessionService.creatSession(user, tokens)
+		return {tokens, user}
 	},
 	async refreshAccessToken(refreshToken: string) {
 		try {

@@ -17,7 +17,7 @@ interface Props {
 export const EmployeesTable: FC<Props> = ({data}) => {
 	const [deleteModal, setDeleteModal] = useState(false)
 	const [employeeId, setEmployeeId] = useState<number | null>(null)
-	const role = useAppSelector(state => state.user.role)
+	const user = useAppSelector(state => state.user.user)
 
 	const handleModalOpen = (id: number) => {
 		setEmployeeId(+id)
@@ -87,11 +87,11 @@ export const EmployeesTable: FC<Props> = ({data}) => {
 		{
 			title: 'Action',
 			key: 'action',
-			className: role === Roles.USER || !role ? 'hidden-class' : '',
+			className: user?.role === Roles.USER || !user?.role ? 'hidden-class' : '',
 			render: (record: IEmployee) => (
 				<Space size='middle'>
-					{role === Roles.ADMIN || role === Roles.MODERATOR ? <Button key='button_edit'>Edit</Button> : <span>-</span>}
-					{role === Roles.ADMIN ? <Button key='button_delete' onClick={() => handleModalOpen(record.id)}>Delete</Button> : null}
+					{user?.role === Roles.ADMIN || user?.role === Roles.MODERATOR ? <Button key='button_edit'>Edit</Button> : <span>-</span>}
+					{user?.role === Roles.ADMIN ? <Button key='button_delete' onClick={() => handleModalOpen(record.id)}>Delete</Button> : null}
 				</Space>),
 		},
 	]

@@ -11,7 +11,7 @@ export interface DecodedJWTToken {
 	exp: number
 }
 
-type GenerateTokens = (login: string, role: Roles) => {accessToken: string, refreshToken: string}
+export type GenerateTokens = (login: string, role: Roles) => {accessToken: string, refreshToken: string}
 
 //
 

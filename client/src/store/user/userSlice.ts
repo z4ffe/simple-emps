@@ -1,20 +1,18 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {Roles} from '../../types/roles.ts'
+import {User} from '../../types/interfaces/user.ts'
 import {login} from './userThunk.ts'
 
 export interface IUserSliceState {
-	login: string
 	accessToken: string
+	user: User | null
 	isAuth: boolean
-	role: Roles | null
 	loading: boolean
 }
 
 const initialState: IUserSliceState = {
-	login: '',
 	accessToken: '',
+	user: null,
 	isAuth: false,
-	role: null,
 	loading: false,
 }
 
@@ -36,9 +34,8 @@ const userSlice = createSlice({
 		})
 		builder.addCase(login.fulfilled, (state, action) => {
 			if (action.payload) {
-				state.login = action.payload.login
 				state.accessToken = action.payload.accessToken
-				state.role = action.payload.role
+				state.user = action.payload.user
 				state.isAuth = true
 				state.loading = false
 			}

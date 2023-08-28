@@ -6,7 +6,7 @@ export class Session {
 	@PrimaryGeneratedColumn()
 	id: number
 
-	@OneToOne(() => User)
+	@OneToOne(() => User, user => user.id)
 	@JoinColumn({name: 'user_id'})
 	userId: User
 

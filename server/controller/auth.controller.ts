@@ -8,11 +8,9 @@ export const authController = {
 	async login(req: Request, res: Response, next: NextFunction) {
 		try {
 			const {login, password} = req.body
-			const data = await authService.login(login, password)
-			res.status(httpStatus.OK).cookie('refresh-token', data.tokens.refreshToken, {maxAge: REFRESH_TOKEN_AGE, httpOnly: true}).json({
-				accessToken: data.tokens.accessToken,
-				login: data.login,
-				role: data.role,
+			const {tokens, user} = await authService.login(login, password)
+			res.status(httpStatus.OK).cookie('refresh-token', tokens.refreshToken, {maxAge: REFRESH_TOKEN_AGE, httpOnly: true}).json({
+				accessToken: tokens.accessToken, user: {...user, password: ''},
 			})
 		} catch (error) {
 			next(error)

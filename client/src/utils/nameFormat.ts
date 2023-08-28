@@ -1,5 +1,5 @@
-export const nameFormat = (name: string) => {
-	if (name[0] === name[0].toLowerCase()) {
-		return name[0].toUpperCase() + name.slice(1)
-	}
+export const nameFormat = (firstName: string, lastName: string) => {
+	const firstNameResult = firstName[0].toUpperCase() + firstName.slice(1)
+	const lastNameResult = lastName[0].toUpperCase() + lastName.slice(1)
+	return `${firstNameResult} ${lastNameResult}`
 }

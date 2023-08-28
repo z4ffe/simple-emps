@@ -1,7 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import {notification} from 'antd'
 import {AxiosError, AxiosResponse} from 'axios'
-import {LoginSchemaType} from '../../schemas/registerSchema.ts'
+import {LoginSchemaType} from '../../schemas/loginSchema.ts'
 import authService from '../../services/authService.ts'
 import {ILogin} from '../../types/contracts/login.ts'
 

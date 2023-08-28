@@ -1,7 +1,6 @@
-import {Roles} from '../roles.ts'
+import {User} from '../interfaces/user.ts'
 
 export interface ILogin {
 	accessToken: string
-	login: string
-	role: Roles
+	user: User
 }

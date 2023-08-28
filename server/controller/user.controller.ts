@@ -7,8 +7,8 @@ import {IRegisterBody} from '../types/requests'
 export const userController = {
 	async register(req: Request<ParamsDictionary, any, IRegisterBody>, res: Response, next: NextFunction) {
 		try {
-			const {login, password} = req.body
-			const newUser = await userService.createNewUser(login, password)
+			const data = req.body
+			const newUser = await userService.createNewUser(data)
 			res.status(httpStatus.OK).json(newUser)
 		} catch (error) {
 			next(error)

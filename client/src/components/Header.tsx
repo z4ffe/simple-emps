@@ -12,7 +12,7 @@ import {AuthModal} from './AuthModal.tsx'
 
 export const Header = () => {
 	const isAuth = useAppSelector(state => state.user.isAuth)
-	const loginName = useAppSelector(state => state.user.login)
+	const user = useAppSelector(state => state.user.user)
 	const [authModal, setAuthModal] = useState<IAuthModalSwitch>({status: false, type: 'login'})
 	const dispatch = useAppDispatch()
 	const [logoutLoading, setLogoutLoading] = useState(false)
@@ -51,9 +51,9 @@ export const Header = () => {
 					<Image src={logo} style={{width: '200px'}} preview={false} />
 				</NavLink>
 			</Col>
-			{isAuth ?
+			{isAuth && user ?
 				<Col style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
-					<Typography style={{fontWeight: '500', fontSize: '1rem'}}>Hello, {nameFormat(loginName)}</Typography>
+					<Typography style={{fontWeight: '500', fontSize: '1rem'}}>Hello, {nameFormat(user.firstName, user.lastName)}</Typography>
 					<Button loading={logoutLoading} onClick={handleLogout} icon={<LogoutOutlined />} style={{fontWeight: '500'}}>Log out</Button>
 				</Col>
 				:
